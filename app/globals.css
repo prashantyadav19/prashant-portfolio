@@ -1,0 +1,657 @@
+@import "tailwindcss";
+
+/* ───────────────────────── Design tokens ─────────────────────────
+   Colors are CSS variables so the light/dark palettes (and the always-dark hero)
+   can swap them. `@theme inline` exposes them as Tailwind utilities:
+   bg-paper, text-ink, text-muted, border-line, bg-accent, text-accent, etc. */
+
+:root {
+  --paper: #f4f6f9;
+  --surface: #ffffff;
+  --ink: #12161d;
+  --muted: #586273;
+  --line: #dde2ea;
+  --accent: #2340d6;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4e9fc;
+  --span-1: #8a97b3;
+  --span-2: #2a8a7d;
+  --span-3: #2340d6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0d1015;
+    --surface: #141922;
+    --ink: #e6e9ef;
+    --muted: #97a0af;
+    --line: #262d38;
+    --accent: #8fa3ff;
+    --accent-ink: #0d1015;
+    --accent-soft: #1b2342;
+    --span-1: #5d6a84;
+    --span-2: #4fb8a8;
+    --span-3: #8fa3ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0d1015;
+  --surface: #141922;
+  --ink: #e6e9ef;
+  --muted: #97a0af;
+  --line: #262d38;
+  --accent: #8fa3ff;
+  --accent-ink: #0d1015;
+  --accent-soft: #1b2342;
+  --span-1: #5d6a84;
+  --span-2: #4fb8a8;
+  --span-3: #8fa3ff;
+  color-scheme: dark;
+}
+
+/* The hero always uses the dark palette, on top of the AI background image. */
+.on-dark {
+  --paper: #0b0f17;
+  --surface: #141a25;
+  --ink: #eef1f6;
+  --muted: #a7b0bf;
+  --line: #2a3240;
+  --accent: #8fa3ff;
+  --accent-ink: #0b0f17;
+  --accent-soft: #1b2342;
+  --span-1: #6c7a96;
+  --span-2: #4fb8a8;
+  --span-3: #8fa3ff;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-span-1: var(--span-1);
+  --color-span-2: var(--span-2);
+  --color-span-3: var(--span-3);
+
+  --font-display: var(--nf-display), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--nf-body), "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--nf-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@theme {
+  /* Type scale: text-caption, text-lede, text-h3, text-h2, text-display */
+  --text-caption: 0.8125rem;
+  --text-lede: 1.1875rem;
+  --text-h3: 1.5rem;
+  --text-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.375rem);
+  --text-display: clamp(2.25rem, 1.4rem + 3.6vw, 3.75rem);
+
+  /* Breakpoints used by this design */
+  --breakpoint-xs: 30rem; /* 480px */
+  --breakpoint-sm: 35rem; /* 560px */
+  --breakpoint-md: 45rem; /* 720px */
+  --breakpoint-lg: 55rem; /* 880px */
+  --breakpoint-xl: 60rem; /* 960px */
+}
+
+/* ───────────────────────── Custom utilities ───────────────────────── */
+
+/* Page container with a safe-area-aware side gutter. */
+@utility wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  @media (width >= 45rem) {
+    padding-left: max(32px, env(safe-area-inset-left, 0px));
+    padding-right: max(32px, env(safe-area-inset-right, 0px));
+  }
+}
+
+/* Small uppercase mono label used as section eyebrows. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Paints the phone's status-bar area above the sticky header. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--paper);
+  }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; letter-spacing: -0.015em; }
+  :where(a, button, summary):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ───────────────────────── Components ─────────────────────────
+   Pieces that need pseudo-elements, calc() with per-element variables,
+   or masks — awkward as utilities, so they live here. */
+
+@layer components {
+  /* Career trace (hero) */
+  .trace-row { display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr); gap: 12px; align-items: center; padding: 6px 0; }
+  .trace-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .trace-row.child .trace-name { padding-left: 1.4em; color: var(--muted); position: relative; }
+  .trace-row.child .trace-name::before { content: "└"; position: absolute; left: 0.2em; color: var(--line); }
+  .trace-track { position: relative; height: 22px; }
+  .trace-bar { position: absolute; top: 3px; height: 16px; border-radius: 3px; background: var(--bar, var(--accent)); left: var(--start); width: var(--width); }
+  .trace-row.child .trace-bar { opacity: 0.3; top: 8px; height: 6px; }
+  .trace-dur {
+    position: absolute;
+    top: 2px;
+    right: calc(100% - var(--start) - var(--width));
+    padding-right: 6px;
+    color: var(--paper);
+    font-size: 0.72rem;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+  .trace-axis { position: relative; height: 18px; margin-top: 8px; margin-left: calc(13em + 12px); border-top: 1px dashed var(--line); color: var(--muted); font-size: 0.7rem; }
+  .trace-axis span { position: absolute; top: 4px; transform: translateX(-50%); }
+  @media (max-width: 30rem) {
+    .trace-row { grid-template-columns: minmax(0, 8.5em) minmax(0, 1fr); }
+    .trace-axis { margin-left: calc(8.5em + 12px); }
+    .trace-dur { display: none; }
+    .trace-axis span:nth-child(even) { display: none; }
+  }
+
+  .live-dot { animation: pulse 2.4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
+  /* Interactive embedding-field canvas */
+  .field {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.35), #000 60%);
+    mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.35), #000 60%);
+  }
+  @media (max-width: 59.99rem) {
+    .field {
+      -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), #000 70%);
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), #000 70%);
+    }
+  }
+
+  /* AI background image with parallax (--mx/--my are set on pointer move) */
+  .hero-bg {
+    position: absolute;
+    inset: -24px;
+    z-index: 0;
+    background-color: var(--paper);
+    background-size: cover;
+    background-position: 68% center;
+    transform: translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0);
+    transition: transform 0.5s ease-out;
+  }
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(9, 12, 19, 0.95) 0%, rgba(9, 12, 19, 0.82) 38%, rgba(9, 12, 19, 0.4) 100%),
+      linear-gradient(180deg, transparent 70%, rgba(9, 12, 19, 0.7) 100%);
+  }
+  @media (max-width: 59.99rem) {
+    .hero-bg { background-position: 62% top; }
+    .hero-bg::after { background: linear-gradient(180deg, rgba(9, 12, 19, 0.72) 0%, rgba(9, 12, 19, 0.9) 45%, rgba(9, 12, 19, 0.96) 100%); }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-bg { transform: none; transition: none; } }
+  /* Contact background sits further right so its envelope icon clears the text */
+  .contact-bg { z-index: -2; background-position: right center; }
+  @media (max-width: 59.99rem) { .contact-bg { background-position: 70% center; } }
+
+  /* "Open to roles" status dot */
+  .status::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--span-2);
+    margin-right: 8px;
+    vertical-align: 1px;
+  }
+
+  /* Expandable "How it works" */
+  .case-toggle { list-style: none; }
+  .case-toggle::-webkit-details-marker { display: none; }
+  .case-toggle::before { content: "+"; font-family: var(--font-mono); width: 1ch; }
+  details[open] > .case-toggle::before { content: "−"; }
+
+  /* Arrows between pipeline steps */
+  .pipeline-step + .pipeline-step { margin-left: 26px; }
+  .pipeline-step + .pipeline-step::before {
+    content: "→";
+    position: absolute;
+    left: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* Video play button */
+  .play { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 18%, transparent); transition: transform 0.2s, box-shadow 0.2s; }
+  .play::after {
+    content: "";
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent var(--accent-ink);
+  }
+  .group:hover .play { transform: scale(1.06); box-shadow: 0 0 0 16px color-mix(in srgb, var(--accent) 14%, transparent); }
+  .video-dots {
+    background:
+      radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--accent) 35%, transparent) 1px, transparent 1.5px) 0 0 / 22px 22px,
+      radial-gradient(120% 90% at 85% 15%, var(--accent-soft), transparent 60%),
+      var(--surface);
+  }
+
+  .field-hint { @media (hover: none) { display: none; } }
+}
+
+@keyframes pulse {
+  50% { opacity: 0.35; }
+}
+
+/* ───────────────────────── Section backgrounds ───────────────────────── */
+
+@layer components {
+  .backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+
+  /* Spotlight that follows the mouse (position set by PointerGlow) */
+  .glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(460px circle at var(--gx, 50%) var(--gy, 50%), color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%);
+  }
+  [data-glow-on] .glow { opacity: 1; }
+
+  /* Contact — aurora: two soft blobs drifting slowly */
+  .backdrop-aurora::before, .backdrop-aurora::after {
+    content: "";
+    position: absolute;
+    width: min(720px, 70vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    filter: blur(20px);
+  }
+  .backdrop-aurora::before {
+    left: -18%;
+    top: -30%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 16%, transparent), transparent 65%);
+    animation: drift-a 26s ease-in-out infinite alternate;
+  }
+  .backdrop-aurora::after {
+    right: -14%;
+    bottom: -40%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--span-2) 14%, transparent), transparent 65%);
+    animation: drift-b 32s ease-in-out infinite alternate;
+  }
+
+  /* Intro video — waveform breathing along the bottom */
+  .wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    display: flex;
+    opacity: 0.75;
+    align-items: flex-end;
+    gap: 5px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  }
+  .wave span {
+    flex: 1;
+    height: var(--h);
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 2%, transparent));
+    transform-origin: bottom;
+    animation: wave 2.2s ease-in-out var(--d) infinite alternate;
+  }
+
+  /* Work — packets travelling along pipeline tracks */
+  .track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--y);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line) 10%, var(--line) 90%, transparent);
+  }
+  .packet {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 140px;
+    height: 5px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 60%, transparent));
+    box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 45%, transparent);
+    animation: travel var(--dur) linear var(--delay) infinite;
+  }
+
+  /* Experience — contribution graph lighting up */
+  .commits {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    translate: 0 -50%;
+    display: grid;
+    grid-template-columns: repeat(30, 14px);
+    gap: 5px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 55%);
+    mask-image: linear-gradient(90deg, transparent, #000 60%);
+    opacity: 0.6;
+  }
+  .commits span {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--line) 80%, transparent);
+    animation: commit 12s ease-in-out var(--d) infinite;
+  }
+
+  /* Skills — nodes orbiting on concentric rings */
+  .orbits { position: absolute; right: -180px; top: 50%; width: 0; height: 0; opacity: 0.7; }
+  @media (max-width: 54.99rem) { .orbits { right: -60px; top: 18%; } }
+  .ring {
+    position: absolute;
+    left: calc(var(--s) / -2);
+    top: calc(var(--s) / -2);
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--line) 90%, transparent);
+    animation: spin var(--dur) linear infinite;
+  }
+  .ring.dashed { border-style: dashed; animation-direction: reverse; }
+  .ring i {
+    position: absolute;
+    left: 50%;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+  .ring i.b { top: auto; bottom: -5px; background: var(--span-2); box-shadow: 0 0 0 5px color-mix(in srgb, var(--span-2) 15%, transparent); }
+  .core {
+    position: absolute;
+    left: -36px;
+    top: -36px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%);
+    animation: breathe 4s ease-in-out infinite alternate;
+  }
+
+  /* Credentials — slow columns of binary */
+  .binary {
+    position: absolute;
+    inset: 0;
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+  }
+  .binary span {
+    position: absolute;
+    top: 0;
+    left: var(--x);
+    width: 1ch;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.5;
+    word-break: break-all;
+    color: color-mix(in srgb, var(--accent) 24%, transparent);
+    animation: rain var(--dur) linear var(--delay) infinite;
+  }
+
+  /* Contact — chat bubbles rising, and a signal pinging out */
+  .ping { position: absolute; right: 16%; top: 50%; width: 0; height: 0; }
+  @media (max-width: 54.99rem) { .ping { right: 12%; top: 22%; } }
+  .ping span {
+    position: absolute;
+    left: -160px;
+    top: -160px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    opacity: 0;
+    animation: ping 4.5s ease-out infinite;
+  }
+  .ping span:nth-child(2) { animation-delay: 1.5s; }
+  .ping span:nth-child(3) { animation-delay: 3s; }
+  .contact-bg ~ .backdrop .ping i { display: none; }
+  .ping i {
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  .bubble {
+    position: absolute;
+    left: var(--x);
+    bottom: -40px;
+    width: var(--w);
+    height: 26px;
+    border-radius: 13px 13px 13px 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    animation: rise var(--dur) linear var(--delay) infinite;
+  }
+  @media (max-width: 54.99rem) { .bubble { scale: 0.85; filter: opacity(0.5); } }
+  .bubble.mine { border-radius: 13px 13px 4px 13px; background: color-mix(in srgb, var(--accent) 16%, var(--surface)); border-color: transparent; }
+  .bubble .lines { width: 70%; height: 4px; border-radius: 2px; background: color-mix(in srgb, var(--muted) 35%, transparent); }
+  .bubble .dots { display: flex; gap: 4px; }
+  .bubble .dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: typing 1.2s ease-in-out infinite; }
+  .bubble .dots i:nth-child(2) { animation-delay: 0.15s; }
+  .bubble .dots i:nth-child(3) { animation-delay: 0.3s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .backdrop *, .backdrop::before, .backdrop::after { animation: none !important; }
+  }
+
+  /* Experience timeline: the accent line draws itself as you scroll */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before, .timeline::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    bottom: 22px;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--line);
+  }
+  .timeline::after { background: var(--accent); transform-origin: top; transform: scaleY(1); }
+  @supports (animation-timeline: view()) {
+    .timeline::after {
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 55%;
+    }
+  }
+  .timeline > li { position: relative; }
+  .timeline > li::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 28px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    z-index: 1;
+  }
+  .timeline > li:first-child::before { top: 6px; }
+
+}
+
+@keyframes drift-a {
+  to { transform: translate(18%, 22%) scale(1.15); }
+}
+@keyframes drift-b {
+  to { transform: translate(-20%, -18%) scale(0.9); }
+}
+@keyframes wave {
+  from { transform: scaleY(0.25); }
+  to { transform: scaleY(1); }
+}
+@keyframes travel {
+  from { transform: translateX(-160px); }
+  to { transform: translateX(100vw); }
+}
+@keyframes commit {
+  0%, 62%, 100% { background: color-mix(in srgb, var(--line) 80%, transparent); }
+  72%, 84% { background: color-mix(in srgb, var(--span-2) calc(var(--l) * 75%), transparent); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes breathe {
+  to { transform: scale(1.4); opacity: 0.6; }
+}
+@keyframes rain {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+@keyframes draw {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes ping {
+  0% { transform: scale(0.1); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0; }
+}
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.75; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(-560px); opacity: 0; }
+}
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* ───────────────────────── Case study popup ───────────────────────── */
+
+@layer components {
+  html:has(dialog.case-modal[open]) { overflow: hidden; }
+
+  .case-modal {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: rgba(6, 9, 15, 0.55);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    backdrop-filter: blur(8px) saturate(120%);
+    padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  }
+  .case-modal[open] { display: grid; place-items: center; animation: scrim-in 0.25s ease-out both; }
+  .case-modal-panel { border-radius: 20px; animation: panel-pop 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .case-modal[data-closing] { animation: scrim-out 0.22s ease-in both; }
+  .case-modal[data-closing] .case-modal-panel { animation: panel-drop 0.22s ease-in both; }
+
+  /* Phones: bottom sheet */
+  @media (max-width: 34.99rem) {
+    .case-modal { padding: 0; padding-top: max(40px, env(safe-area-inset-top, 0px)); }
+    .case-modal[open] { place-items: end stretch; }
+    .case-modal-panel { width: 100%; border-radius: 20px 20px 0 0; max-height: 92dvh; padding-bottom: env(safe-area-inset-bottom, 0px); animation-name: sheet-up; }
+    .case-modal[data-closing] .case-modal-panel { animation-name: sheet-down; }
+  }
+
+  .modal-header-glow {
+    position: absolute;
+    right: -80px;
+    top: -120px;
+    width: 320px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+
+  .modal-rise { animation: rise-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+  /* Flow diagram: steps appear one after another, joined by arrows */
+  .flow-step { animation: rise-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(160ms + var(--i) * 110ms); }
+  @media (min-width: 35rem) {
+    .flow-step + .flow-step { margin-left: 28px; }
+    .flow-step + .flow-step::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 50%;
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--line), var(--accent));
+      transform-origin: left;
+      animation: grow-x 0.35s ease-out both;
+      animation-delay: calc(220ms + var(--i) * 110ms);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-modal[open], .case-modal-panel, .modal-rise, .flow-step, .flow-step::before { animation: none !important; }
+  }
+}
+
+@keyframes scrim-in { from { opacity: 0; } }
+@keyframes scrim-out { to { opacity: 0; } }
+@keyframes panel-pop { from { opacity: 0; transform: translateY(14px) scale(0.965); } }
+@keyframes panel-drop { to { opacity: 0; transform: translateY(10px) scale(0.98); } }
+@keyframes sheet-up { from { transform: translateY(100%); } }
+@keyframes sheet-down { to { transform: translateY(100%); } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes grow-x { from { transform: scaleX(0); } }

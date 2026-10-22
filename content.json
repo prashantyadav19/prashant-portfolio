@@ -1,0 +1,690 @@
+{
+  "site": {
+    "url": "https://prashantyadav.dev",
+    "title": "Prashant Yadav · Lead AI & Full Stack Engineer",
+    "description": "Lead AI and full-stack engineer in Pune building agentic AI platforms, multi-agent systems and hybrid RAG on AWS, with Python, FastAPI, LangGraph and Next.js.",
+    "footer": "Built with Next.js and Tailwind CSS · Hosted on Vercel"
+  },
+  "nav": {
+    "intro": "Intro",
+    "work": "Work",
+    "experience": "Experience",
+    "skills": "Skills",
+    "contact": "Contact",
+    "ariaLabel": "Sections"
+  },
+  "profile": {
+    "name": "Prashant Yadav",
+    "status": "Open to lead AI & engineering roles",
+    "photo": "/profile.webp",
+    "photoAlt": "Portrait of Prashant Yadav",
+    "email": "prashant.yadav567@gmail.com",
+    "resume": {
+      "label": "Résumé (PDF)",
+      "file": "/resume.pdf"
+    },
+    "links": [
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/prashant7665"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/prashantyadav19"
+      }
+    ]
+  },
+  "hero": {
+    "eyebrow": "Lead AI & Full Stack Engineer · Agentic AI · Pune, India",
+    "tagline": "I build *agentic AI systems*, and the platforms they run on.",
+    "intro": "11+ years designing enterprise-scale, cloud-native platforms for banking, fintech, e-commerce and manufacturing. Right now I'm leading an Agentic AI platform that serves 500+ engineering leaders through Microsoft Teams, built on LangGraph, FastAPI, pgvector and AWS Bedrock.",
+    "ctaLabel": "Get in touch",
+    "hint": "Move your cursor: the background is a live nearest-neighbour search.",
+    "backgroundImage": "/hero-ai.webp",
+    "trace": {
+      "label": "trace",
+      "root": "career",
+      "title": "prashant.career",
+      "ariaLabel": "Career timeline",
+      "running": "running",
+      "now": "now"
+    },
+    "career": [
+      {
+        "company": "Habilelabs",
+        "start": "2015-06",
+        "end": "2019-02",
+        "projects": "Polls Guru · Hiretale",
+        "color": "span-1"
+      },
+      {
+        "company": "Wipro",
+        "start": "2019-02",
+        "end": "2021-10",
+        "projects": "HSBC loan platform",
+        "color": "span-2"
+      },
+      {
+        "company": "Coforge",
+        "start": "2021-10",
+        "end": "",
+        "projects": "Agentic AI platform · MatcoTools",
+        "color": "span-3"
+      }
+    ]
+  },
+  "introVideo": {
+    "eyebrow": "Intro video",
+    "youtubeId": "",
+    "mp4": "",
+    "poster": "/intro-poster.webp",
+    "playLabel": "Play",
+    "title": "Meet Prashant",
+    "duration": "",
+    "heading": "A two-minute introduction",
+    "summary": "Who I am, what I'm building now, and how I work with product and engineering teams.",
+    "topics": [
+      "About me and the teams I do my best work with",
+      "A walkthrough of the Agentic AI delivery platform",
+      "How I approach system design and architecture"
+    ]
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "heading": "Production systems, measured by what changed for the business",
+    "intro": "Client code is private, so each project is described by the problem, the approach and the result.",
+    "detailsLabel": "How it works",
+    "modal": {
+      "close": "Close",
+      "results": "Results",
+      "flow": "How it flows",
+      "approach": "What I did",
+      "stack": "Tech stack"
+    },
+    "caseStudies": [
+      {
+        "context": "Enterprise platform · Coforge · Current",
+        "title": "Enterprise Delivery Intelligence Platform",
+        "summary": "Delivery information for engineering teams lives across Jira, GitHub and Confluence. I'm leading the architecture and delivery of an Agentic AI platform in Microsoft Teams that answers engineering leaders' delivery questions from those sources, with citations they can check.",
+        "stack": [
+          "Python",
+          "FastAPI",
+          "LangGraph",
+          "Multi-agent systems",
+          "RAG",
+          "PostgreSQL",
+          "pgvector",
+          "Redis",
+          "AWS Bedrock",
+          "AWS ECS",
+          "SQS",
+          "S3",
+          "Terraform"
+        ],
+        "metrics": [
+          {
+            "value": "500+",
+            "label": "engineering leaders served"
+          },
+          {
+            "value": "50+",
+            "label": "teams on the platform"
+          },
+          {
+            "value": "~50%",
+            "label": "less manual delivery investigation"
+          }
+        ],
+        "pipeline": [
+          {
+            "step": "Ask",
+            "detail": "question in Teams"
+          },
+          {
+            "step": "Plan",
+            "detail": "LangGraph agents"
+          },
+          {
+            "step": "Retrieve",
+            "detail": "hybrid RAG, pgvector"
+          },
+          {
+            "step": "Verify",
+            "detail": "sources + citations"
+          },
+          {
+            "step": "Answer",
+            "detail": "cited reply in Teams"
+          }
+        ],
+        "pipelineNote": "Simplified view of how a question is answered. Jira, GitHub and Confluence data arrives through event-driven ingestion (webhooks, SQS, S3, Redis).",
+        "details": [
+          "Leading architecture and delivery of an enterprise Agentic AI platform serving 500+ engineering leaders across 50+ teams.",
+          "Designed LangGraph-based multi-agent workflows with source verification and citation mechanisms.",
+          "Architected hybrid RAG using PostgreSQL + pgvector across Jira, GitHub and Confluence data sources.",
+          "Built event-driven ingestion pipelines using AWS SQS, S3, Redis and webhooks.",
+          "Established RBAC, audit logging, observability and security controls for enterprise adoption.",
+          "Reduced manual delivery investigation effort by approximately 50%."
+        ]
+      },
+      {
+        "context": "MatcoTools · Coforge",
+        "title": "AI Shopping Assistant & Visual Product Discovery",
+        "summary": "Technicians often know what's broken but not the part number. I architected a multimodal assistant where they describe what they need or upload a photo of a broken tool or missing vehicle part, and get compatible replacements with technical guidance.",
+        "stack": [
+          "Python",
+          "FastAPI",
+          "RAG",
+          "LangChain",
+          "Pinecone",
+          "AWS Bedrock",
+          "HuggingFace",
+          "React",
+          "Next.js"
+        ],
+        "metrics": [
+          {
+            "value": "+15%",
+            "label": "recommendation conversion"
+          },
+          {
+            "value": "Text + photo",
+            "label": "search by description or by image"
+          }
+        ],
+        "pipeline": [
+          {
+            "step": "Ask",
+            "detail": "question or photo"
+          },
+          {
+            "step": "Embed",
+            "detail": "text + image embeddings"
+          },
+          {
+            "step": "Search",
+            "detail": "Pinecone vectors"
+          },
+          {
+            "step": "Reason",
+            "detail": "LangChain + Bedrock"
+          },
+          {
+            "step": "Recommend",
+            "detail": "compatible parts + guidance"
+          }
+        ],
+        "pipelineNote": "Simplified view of the visual search and recommendation flow.",
+        "details": [
+          "Architected a multimodal AI assistant that lets technicians identify tools and vehicle parts through natural language and image uploads.",
+          "Developed a visual search workflow that matches photos of broken tools or missing vehicle components against the product catalog using image embeddings and vector search.",
+          "Built a RAG-powered recommendation engine with LangChain, Pinecone and AWS Bedrock for technical guidance and compatible replacement recommendations.",
+          "Increased recommendation conversion by 15% through AI-powered search and personalized product discovery."
+        ]
+      },
+      {
+        "context": "MatcoTools · Coforge",
+        "title": "E-commerce and financing platform for the tool trade",
+        "summary": "A commerce platform serving technicians and distributors across the USA and Canada, with built-in financing so technicians can buy expensive equipment on EMI.",
+        "stack": [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "GraphQL",
+          "MongoDB",
+          "Microservices",
+          "AWS",
+          "Jenkins"
+        ],
+        "metrics": [
+          {
+            "value": "2.5 s → 800 ms",
+            "label": "checkout latency on purchasing APIs"
+          },
+          {
+            "value": "+25%",
+            "label": "financed purchases"
+          },
+          {
+            "value": "150,000+",
+            "label": "technicians and 2,000+ distributors"
+          }
+        ],
+        "pipeline": [],
+        "pipelineNote": "",
+        "details": [
+          "Designed and scaled the platform for 150,000+ technicians and 2,000+ distributors across the USA and Canada.",
+          "Architected microservices and GraphQL APIs for customer onboarding, product catalog management, financing approvals and payment processing.",
+          "Built financing and EMI management workflows that increased financed purchases by 25%.",
+          "Optimized critical purchasing APIs, cutting checkout latency from 2.5s to 800ms."
+        ]
+      },
+      {
+        "context": "HSBC · Wipro · 2019–2021",
+        "title": "Loan management for enterprise banking",
+        "summary": "Enterprise loan management modules for investors, suppliers and buyers inside HSBC's banking systems, built on React, Node.js and microservices.",
+        "stack": [
+          "React",
+          "Node.js",
+          "Express.js",
+          "JavaScript",
+          "REST APIs",
+          "PostgreSQL",
+          "Microservices",
+          "AWS",
+          "Git"
+        ],
+        "metrics": [
+          {
+            "value": "−30%",
+            "label": "loan processing time"
+          },
+          {
+            "value": "−25%",
+            "label": "application response times"
+          }
+        ],
+        "pipeline": [],
+        "pipelineNote": "",
+        "details": [
+          "Developed enterprise loan management modules for investors, suppliers and buyers using React, Node.js and microservices architecture.",
+          "Built and integrated REST APIs supporting loan approval workflows, reducing processing time by 30%.",
+          "Optimized application performance through frontend and API enhancements, improving response times by 25%.",
+          "Contributed to AWS-based deployment, monitoring and production support."
+        ]
+      }
+    ],
+    "earlier": {
+      "heading": "Earlier projects",
+      "context": "Habilelabs · 2015–2019",
+      "projects": [
+        {
+          "context": "Habilelabs · 2015–2019",
+          "title": "Polls Guru & Hiretale",
+          "kind": "Survey platform and job portal",
+          "summary": "Led development of cloud-based polling, analytics and recruitment platforms for enterprise users, including real-time dashboards and reporting, AWS deployments and CI/CD pipelines.",
+          "metrics": [
+            {
+              "value": "−60%",
+              "label": "processing effort"
+            },
+            {
+              "value": "+25%",
+              "label": "user engagement"
+            },
+            {
+              "value": "−40%",
+              "label": "page load time"
+            },
+            {
+              "value": "99.9%",
+              "label": "availability"
+            }
+          ],
+          "stack": [
+            "React",
+            "JavaScript",
+            "Node.js",
+            "Express.js",
+            "MongoDB",
+            "REST APIs",
+            "AWS",
+            "CI/CD"
+          ]
+        }
+      ]
+    }
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "heading": "Three companies, one thread: products that hold up under real traffic",
+    "roles": [
+      {
+        "when": "Oct 2021 – Present",
+        "title": "Tech Lead",
+        "company": "Coforge",
+        "summary": "Leading an enterprise Agentic AI platform for 500+ engineering leaders, plus the AI shopping assistant and the e-commerce and financing platform for MatcoTools."
+      },
+      {
+        "when": "Feb 2019 – Oct 2021",
+        "title": "Senior Project Engineer",
+        "company": "Wipro",
+        "summary": "Loan management modules, REST APIs and approval workflows for HSBC."
+      },
+      {
+        "when": "Jun 2015 – Feb 2019",
+        "title": "Software Engineer",
+        "company": "Habilelabs",
+        "summary": "Led development of Polls Guru and Hiretale on React, Node.js, MongoDB and AWS."
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "heading": "What I work with",
+    "hint": "Hover or tap a skill to see where I've used it.",
+    "legend": "used in a project on this page",
+    "usedIn": "used in",
+    "and": "and",
+    "notUsed": "part of my toolkit, not tied to a project on this page.",
+    "groups": [
+      {
+        "group": "AI & GenAI",
+        "skills": [
+          {
+            "name": "LangGraph",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "LangChain",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Multi-agent systems",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "RAG",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Hybrid search",
+            "note": "Vector + keyword retrieval",
+            "also": [
+              "pgvector"
+            ]
+          },
+          {
+            "name": "MCP",
+            "note": "Model Context Protocol",
+            "also": []
+          },
+          {
+            "name": "LangSmith",
+            "note": "Tracing and evaluation of LLM apps",
+            "also": []
+          },
+          {
+            "name": "RAGAS",
+            "note": "RAG evaluation",
+            "also": []
+          },
+          {
+            "name": "Bedrock",
+            "note": "AWS Bedrock",
+            "also": [
+              "AWS Bedrock"
+            ]
+          },
+          {
+            "name": "OpenAI",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Anthropic",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "HuggingFace",
+            "note": "Text and image embeddings",
+            "also": []
+          }
+        ]
+      },
+      {
+        "group": "Backend",
+        "skills": [
+          {
+            "name": "Python",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "FastAPI",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Node.js",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Express.js",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "REST APIs",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "GraphQL",
+            "note": "",
+            "also": []
+          }
+        ]
+      },
+      {
+        "group": "Frontend",
+        "skills": [
+          {
+            "name": "React.js",
+            "note": "",
+            "also": [
+              "React"
+            ]
+          },
+          {
+            "name": "Next.js",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "TypeScript",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "JavaScript",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Redux",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "HTML5 & CSS3",
+            "note": "",
+            "also": []
+          }
+        ]
+      },
+      {
+        "group": "Cloud & DevOps",
+        "skills": [
+          {
+            "name": "AWS",
+            "note": "",
+            "also": [
+              "AWS Bedrock",
+              "AWS ECS",
+              "SQS",
+              "S3"
+            ]
+          },
+          {
+            "name": "ECS",
+            "note": "",
+            "also": [
+              "AWS ECS"
+            ]
+          },
+          {
+            "name": "Lambda",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "S3",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "SQS",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "RDS",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Terraform",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Docker",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Jenkins",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "GitHub Actions",
+            "note": "",
+            "also": []
+          }
+        ]
+      },
+      {
+        "group": "Databases",
+        "skills": [
+          {
+            "name": "PostgreSQL",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "pgvector",
+            "note": "Vector search inside PostgreSQL",
+            "also": []
+          },
+          {
+            "name": "MongoDB",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Redis",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Pinecone",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "FAISS",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Chroma DB",
+            "note": "",
+            "also": []
+          }
+        ]
+      },
+      {
+        "group": "Architecture & design",
+        "skills": [
+          {
+            "name": "Solution architecture",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "System design",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Microservices",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Event-driven architecture",
+            "note": "",
+            "also": [
+              "SQS"
+            ]
+          },
+          {
+            "name": "Distributed systems",
+            "note": "",
+            "also": []
+          },
+          {
+            "name": "Platform engineering",
+            "note": "",
+            "also": []
+          }
+        ]
+      }
+    ]
+  },
+  "credentials": {
+    "eyebrow": "Certifications & education",
+    "heading": "Credentials",
+    "certifications": [
+      {
+        "name": "AWS Certified Developer – Associate",
+        "issuer": "Amazon Web Services"
+      },
+      {
+        "name": "Associate Cloud Engineer",
+        "issuer": "Google Cloud"
+      },
+      {
+        "name": "Generative AI with Large Language Models",
+        "issuer": "DeepLearning.AI and AWS"
+      },
+      {
+        "name": "Appathon winner",
+        "issuer": "Hack Day Codefest, 24-hour app build"
+      }
+    ],
+    "education": [
+      {
+        "name": "B.Tech, Computer Science",
+        "issuer": "Jaipur National University · 2011–2015"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Building something with LLMs?",
+    "text": "I'm open to lead AI and full-stack engineering roles. Email is the fastest way to reach me.",
+    "backgroundImage": "/contact-bg.webp",
+    "copyLabel": "Copy email",
+    "copiedLabel": "Copied",
+    "selectedLabel": "Selected, press Ctrl+C"
+  }
+}
